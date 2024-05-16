@@ -14,15 +14,15 @@ const User = require("./models/user");
 
 const app = express();
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-//   );
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -57,7 +57,7 @@ app.use(errorHandler);
 const port = process.env.PORT || 5000;
 
 mongoose
-  .connect("mongodb://localhost:27017/avan-kart")
+  .connect("mongodb+srv://iparkavan:fo3BVtK2dXTzpeHb@e-com-1.5vodvdy.mongodb.net/e-commerce")
   .then((result) => {
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
