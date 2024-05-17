@@ -7,9 +7,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   const { username, email, password } = req.body;
   console.log(`Email: ${email}, Password: ${username}, ${password}`);
 
-  if (!email || !password) {
-    res.json({ message: "email id and password is must" });
-  }
+  if (!email || !password) return;
 
   const isUserAvailable = await User.findOne({ email });
 
@@ -25,7 +23,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
       email,
       password: hashedPassword,
     });
-    console.log(userInfo);
 
     if (userInfo) {
       return res.status(201).json({ message: "User Registered Successfully" });
@@ -39,7 +36,7 @@ const checkLoginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.json({ errorMessage: "email and password is required" });
+    return res.json({ errorMessage: "Email and Password is required" });
   }
 
   const user = await User.findOne({ email });
